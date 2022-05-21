@@ -104,3 +104,20 @@ Angular CLI
 
 @angular/core": "~12.2.0",
 
+# Configurar backend
+
+El backend contiene un archivo llamos default.json para configurar los accesos a la base de datos
+/backend/config/default.json
+
+{
+    "app": {
+        "port": 3000
+    },
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "name": "axsistec"
+    }
+}
+
