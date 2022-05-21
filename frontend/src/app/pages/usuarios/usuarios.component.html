@@ -1,0 +1,124 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<p-toolbar>
+					<div class="p-toolbar-group-right">
+						<p-button *ngIf="!register" (onClick)="registerUser()" class="m-1" icon="pi pi-plus"></p-button>
+						<p-button *ngIf="register" (onClick)="registerUser()" class="m-1" icon="pi pi-times"></p-button>
+					</div>
+				</p-toolbar>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="mt-2">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<p-table [value]="usuarios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+						currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+						<ng-template pTemplate="header">
+							<tr>
+								<th>Id</th>
+								<th>Usuario</th>
+								<th>Email</th>
+								<th>Sexo</th>
+								<th>Estatus</th>
+								<th>Acciones</th>
+							</tr>
+						</ng-template>
+						<ng-template pTemplate="body" let-usuarios>
+							<tr>
+								<td><a href="">{{usuarios.id}}</a></td>
+								<td>{{usuarios.user}}</td>
+								<td>{{usuarios.email}}</td>
+								<td>{{usuarios.gender}}</td>
+								<td>{{usuarios.status | status }}</td>
+								<td>
+									<p-button  icon="pi pi-user-edit" class="p-button-sm m-1" (onClick)="editUser(usuarios.id)"></p-button>
+									<p-button  icon="pi pi-trash" class="p-button-sm m-1" (onClick)="deleteUser(usuarios.id)"></p-button>
+								</td>
+							</tr>
+						</ng-template>
+						<ng-template pTemplate="paginatorright">
+							<p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+						</ng-template>
+					</p-table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="pt-5 pb-5">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<app-register [active]="register"></app-register>
+
+				<div class="animated fadeIn card p-4" *ngIf="activeUpd">
+					<p-button *ngIf="activeUpd" (onClick)="cancelUpdate()" class="m-1" icon="pi pi-times"></p-button>
+					<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+						
+
+						<h2>Actualizar usuario</h2>
+						<div class="mb-3">
+							  <label for="email" class="form-label">Email</label>
+							  <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
+							  <div *ngIf="form.email.errors" class="alert alert-danger mt-2" role="alert">
+								Email invalido
+							</div>
+						</div>
+						
+						<div class="mb-3">
+							<label for="usuario" class="form-label">Usuario</label>
+							<input type="text" class="form-control" id="usuario" formControlName="usuario" aria-describedby="emailHelp">
+							<div *ngIf="form.usuario.errors" class="alert alert-danger mt-2" role="alert">
+								Usuario invalido
+							</div>
+						</div>
+						
+						<div class="mb-3">
+							<label for="genero" class="form-label">Genero</label>
+							<div class="form-check">
+								<input class="form-check-input" value="Masculino" type="radio" name="genero" formControlName="genero" id="genero1">
+								<label class="form-check-label" for="genero1">
+									Maculino
+								</label>
+							  </div>
+							  <div class="form-check">
+								<input class="form-check-input" value="Femenino" type="radio" name="genero" formControlName="genero" id="genero2">
+								<label class="form-check-label" for="genero2">
+									Femenino
+								</label>
+							  </div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Password</label>
+							<input type="password" class="form-control" formControlName="password" id="password">
+							<div *ngIf="form.password.errors" class="alert alert-danger mt-2" role="alert">
+								Password invalido:
+								<ul>
+									<li>Debe tener al menos: 1 mayúscula </li>
+									<li>Debe tener al menos: 1 minúscula </li>
+									<li>Debe tener al menos: 1 símbolo </li>
+									<li>Debe tener al menos: 1 numero </li>
+								</ul>
+							</div>
+							
+					  </div>
+						<div class="mb-3">
+							<label for="confirmPassword" class="form-label">Confirma password</label>
+							<input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword">
+							<div *ngIf="!form.password.value" class="alert alert-warning mt-2" role="alert">
+								Dejar en blanco si desea mantener su password.
+							  </div>
+						  </div>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					  </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
