@@ -81,7 +81,7 @@ Entregables:
 
 # Detalles del requerimiento
 
-1 . En el backend dentro de la carpeta scripts se encuentran los procedimientos almacenados
+1 . En el backend dentro de la carpeta scripts se encuentran los procedimientos almacenados y un archivo con nombre axsistec.sql, el cual es un respaldo de la bd
 2 . Inicio del backend: Se instalan las dependencias con npm install, una vez instaladas vamos a correr: npm run dev, el cual corre mediante nodemon
 3 . Inicio del front: Se hace la instalacion con npm install,  seguido de ng serve
 4 . URL Backend  http://localhost:3000
